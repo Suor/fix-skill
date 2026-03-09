@@ -2,6 +2,7 @@
 name: fix
 description: Find and implement all FIX: and FIX0: comments in the codebase
 disable-model-invocation: true
+allowed-tools: Bash(node */fix/parts.js *), Bash(git add *), Bash(git commit *)
 ---
 
 # Fix All FIX: Comments
@@ -28,7 +29,7 @@ Create a todo item for each FIX comment using the TaskCreate tool. This gives vi
 
 For each FIX comment, **sequentially** (never in parallel):
 
-!`node ${CLAUDE_SKILL_DIR}/parts.js render step4 --renumber -- "$ARGUMENTS"`
+!`node ${CLAUDE_SKILL_DIR}/parts.js render step4 --renumber -- $ARGUMENTS`
 
 ## Important Rules
 
@@ -37,4 +38,4 @@ For each FIX comment, **sequentially** (never in parallel):
 - Process fixes strictly one at a time
 - If a FIX comment references other FIX comments or depends on them, handle dependencies in order
 
-!`node ${CLAUDE_SKILL_DIR}/parts.js rest '-a/--agents' '-c/--commits' -- "$ARGUMENTS"`
+!`node ${CLAUDE_SKILL_DIR}/parts.js rest -a/--agents -c/--commits -- $ARGUMENTS`
