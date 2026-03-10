@@ -13,6 +13,14 @@ Besides being async, `FIX:` comments have several advantages over chatting with 
 - store right there with related code, add to version control if you wish,
 - won't be lost in longer contexts.
 
+## Install
+
+Clone into your Claude Code skills directory:
+
+```bash
+git clone https://github.com/Suor/fix-skill.git ~/.claude/skills/fix
+```
+
 ## Usage
 
 ```
@@ -26,8 +34,8 @@ Besides being async, `FIX:` comments have several advantages over chatting with 
 
 | Flag | Long | Effect |
 |------|------|--------|
-| `-a` | `--agents` | Launch a separate agent for each fix instead. Useful if your fixes are unrelated or if you are running out of context window. Only use if you need this |
-| `-c` | `--commits` | Auto-commit after each fix with a descriptive message |
+| `-a` | `--agents` | Launch a separate agent for each fix instead. Useful if your fixes are unrelated or if you are running out of context window, somewhat wasteful otherwise  |
+| `-c` | `--commits` | Auto-commit after each fix with a descriptive message. May squash it later, but protects from later passes destroying work |
 
 
 ### Comment Format
@@ -35,7 +43,7 @@ Besides being async, `FIX:` comments have several advantages over chatting with 
 - **`FIX:`** — standard fix comment, processed from easiest to hardest
 - **`FIX0:`** — high-priority fix, always processed first
 
-Multi-line comments are supported — surrounding lines are read for context.
+Multi-line comments are supported.
 
 ### Example
 
@@ -45,7 +53,7 @@ def get_user(id):
     return db.query(User).filter_by(id=id).one()
 ```
 
-After running `/fix`, Claude will read the comment, implement the requested change, verify it with tests, and remove the comment.
+After running `/fix`, Claude will read the comment, implement the requested change, verify it with lints and tests, and remove the comment.
 
 
 ### Escape hatch
