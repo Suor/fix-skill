@@ -11,9 +11,7 @@ Find and implement all `FIX:` and `FIX0:` comments in the codebase, then fix the
 
 ## Step 1: Find All FIX Comments
 
-Use Grep to search for `FIX\d*:` across ALL files (any type — code, markdown, config, etc.). Collect every match with its file path, line number, and the full comment text. Include multi-line FIX comments (read surrounding lines for context).
-
-Note: Grep (ripgrep) respects .gitignore. If you suspect there may be FIX comments in ignored files, also search with `Bash("rg --no-ignore 'FIX\d*:' .")` to catch them.
+Use Grep to search for `\bFIX\d*:` across ALL files (any type — code, markdown, config, etc.). Collect every match with its file path, line number, and the full comment text. Include multi-line FIX comments (read surrounding lines for context).
 
 ## Step 2: Sort Them
 
@@ -34,7 +32,7 @@ For each FIX comment, **sequentially** (never in parallel):
 ## Important Rules
 
 - **NEVER remove a FIX comment unless the issue it describes is actually fixed**
-- If a fix cannot be fully implemented, add a `RES:` comment below the FIX comment explaining what was tried, what blocked it, and what alternatives were considered — but try hard before resorting to this
+- If a fix cannot be fully implemented, add a `RES:` comment below the FIX comment explaining what was tried, what blocked it, and what alternatives were considered — but try hard before resorting to this. Do NOT remove FIX comment in this case
 - Process fixes strictly one at a time
 - If a FIX comment references other FIX comments or depends on them, handle dependencies in order
 
