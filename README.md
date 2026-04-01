@@ -21,6 +21,23 @@ Clone into your Claude Code skills directory:
 git clone https://github.com/Suor/fix-skill.git ~/.claude/skills/fix
 ```
 
+### Guard Hook (recommended)
+
+The included `guard_fix.sh` hook prevents the agent from removing `FIX:` comments before verifying the changes or removing neighnoring `FIX:` comments that got into way. Add this to your `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [{
+        "hooks": [
+          {"type": "command",
+           "command": "bash ~/.claude/skills/fix/guard_fix.sh"}
+        ]
+    }]
+  }
+}
+```
+
 ## Usage
 
 ```
